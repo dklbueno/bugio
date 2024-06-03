@@ -2,11 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CampaingController;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\CampaingExport;
 
-Route::get('/export', function () {
-    return Excel::download(new CampaingExport, 'campaings.xlsx');
-});
+Route::get('/export-owners', [CampaingController::class, 'exportOwners'])->name('export-owners');
 
-Route::get('/campaings', [CampaingController::class, 'index'])->name('campaings.index');
+Route::get('/campaing-owners', [CampaingController::class, 'owners'])->name('owners.index');
