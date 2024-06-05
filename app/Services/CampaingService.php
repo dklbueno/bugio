@@ -27,10 +27,10 @@ class CampaingService
                         'email' => $email,
                         'phone' => $phone,
                         'document' => $data['document_number'],
-                        'street' => $data['addresses'][0]['street'],
-                        'city' => $data['addresses'][0]['city'],
-                        'address_numner' => $data['addresses'][0]['number'],
-                        'uf' => $data['addresses'][0]['uf']
+                        'street' => count($data['addresses']) ? $data['addresses'][0]['street'] : '',
+                        'city' => count($data['addresses']) ? $data['addresses'][0]['city'] : '',
+                        'address_numner' => count($data['addresses']) ? $data['addresses'][0]['number'] : '',
+                        'uf' => count($data['addresses']) ? $data['addresses'][0]['uf'] : ''
                     ];
                 }                
             }
