@@ -12,12 +12,10 @@
         
         <div class="d-flex justify-content-between">
         <form id="searchForm" class="form-inline" action="/campaing-owners" method="get">
-            <input type="text" name="campaing_id" class="form-control" style="width: 400px;" placeholder="Buscar">
+            <input type="text" id="campaing_id" name="campaing_id" class="form-control" style="width: 400px;" placeholder="Buscar">
             <button type="submit" class="btn btn-primary" style="width: 150px;">Buscar</button>
         </form>
-        @if(count($owners))
-        <a href="/export-owners?campaing_id={{ request()->campaing_id }}" class="btn btn-success mb-3">Exportar para Excel</a>
-        @endif
+        <button onclick="exportReport()" class="btn btn-success mb-3">Exportar para Excel</button>
         </div>
 
         <h3>{{ $campaing_name }}</h3>
@@ -46,11 +44,31 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="4" class="text-center">Nenhum proprietário encontrado!</td>
+                        <td colspan="7" class="text-center">Nenhum proprietário encontrado!</td>
                     </tr>
                 @endforelse
             </tbody>
         </table>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <script>
+        function exportReport()
+        {
+            var campaingId = "{{ request()->campaing_id }}"
+
+            if(! campaingId) {
+                campaingId = $("#campaing_id").val()
+            }
+
+            if(! campaingId) {
+                alert("Necessário realizar busca!")
+                return false
+            }
+
+            window.location.href = "{{ route('export-owners') }}" + "?campaing_id=" + campaingId
+        }
+    </script>
 </body>
 </html>

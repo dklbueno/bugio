@@ -25,8 +25,7 @@ class CampaingController extends Controller
                 $detail = $response->json()['data'];
                 $campaing_name = $detail['name'];
                 $owners = CampaingService::getOwners($detail, $request->campaing_id);
-            }
-            
+            }            
         } 
 
         return view('owners.index', compact('campaing_name', 'owners'));
